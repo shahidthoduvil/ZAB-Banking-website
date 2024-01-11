@@ -33,18 +33,19 @@
 
     input[type="submit"],
     button {
-        background-color: #c9c8c5;
-        color: black;
+        background-color: #4798d6;
+        color: white;
         padding: 10px 15px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         border:3 px;
+        
     }
 
     input[type="submit"]:hover,
     button:hover {
-        background-color: #08376a;
+        background-color: ##1e7fc9;
     }
 ........................................
     label {
@@ -60,7 +61,9 @@
     }
 </style>
 
-<button onclick="showForm()">Open Form</button>
+<button onclick="showForm()" sytle='margin-top:3px;'>Open Form</button>
+
+<button sytle='margin-top:3px;' ><a href ='{% url 'home' %}'  style='color:white' >Return to Home</a></button>
 
 <div id="applicationForm" style="display:none;">
     {% if messages %}
@@ -142,7 +145,7 @@
         <div class="d-flex justify-content-center mt-3 login_container">
             <input class="btn login_btn" type="submit" value="submit">
         </div>
-        <button ><a href ='{% url 'home' %}'>Return to Home</a></button>
+      
     </form>
 </div>
 
