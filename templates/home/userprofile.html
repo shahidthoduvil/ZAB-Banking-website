@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container pt-2 pb-2">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="{% static './images/ZAB.png' %}" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 100px;">
+                        </div>
+                        <div class="col-10 align-self-center">
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        {% if customerapplication %}
+                        
+
+                        <div class="form-group row">
+                            <label for="fullName" class="col-sm-3 col-form-label">Full Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="fullName" value="{{customerapplication.user.username }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="email" value="{{customerapplication.mail_id }}" readonly>
+                            </div>
+                        </div>
+                        
+                   
+                        
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="address" readonly>{{customerapplication.address }}</textarea>
+                            </div>
+                        </div>
+
+                    
+                        <div class="form-group row">
+                            <label for="phone_number" class="col-sm-3 col-form-label">Phone Number</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="phone_number" value='{{customerapplication.phone_number }}' readonly />
+                            </div>
+                        
+                            <label for="dob" class="col-sm-3 col-form-label">Dob</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="dob" value="{{customerapplication.dob }}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="gender" value="{{customerapplication.gender }}" readonly>
+                            </div>
+                            
+                            <label for="age" class="col-sm-3 col-form-label">Age</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="age" value="{{customerapplication.age }}" readonly>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="accountType" class="col-sm-3 col-form-label">Account Type</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="accountType" value="{{customerapplication.account_type }}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="accountType" class="col-sm-3 col-form-label">District</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="district" value="{{customerapplication.district }}" readonly>
+                            </div>
+                        </div>
+
+                       
+                        <div class="form-group row">
+                            <label for="accountType" class="col-sm-3 col-form-label">Branch</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="branch" value="{{customerapplication.branch }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="materialType" class="col-sm-3 col-form-label">Material Type</label>
+                            <div class="col-sm-9">
+                              
+                                <input type="text" class="form-control" id="materialType" value="{{customerapplication.material_provide}}" readonly>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="text-center">
+    <h1>Welcome to ZAB Bank</h1>
+    <p>Your Trusted Banking Partner</p>
+</header>
+
+<section class='container-fluid' style='background-color: #dad9d9'>
+    <div class="row">
+
+        <div class="col-md-6 text-center">
+            <img src="{% static './images/ZAB.png' %}" alt="ZAB Bank Logo" class="img-fluid" style="max-width: 100%;">
+        </div>
+
+        <div class="col-md-6">
+            <p>ZAB Bank is committed to providing exceptional financial services to our customers. With a focus on innovation and customer satisfaction, we strive to meet your banking needs effectively.</p>
+            <p>Our range of services includes personalized accounts, secure online banking, investment opportunities, and much more. Whether you are an individual, business owner, or investor, ZAB Bank is here to support your financial goals.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="features container text-center " style='background-color: #ebe4d1'>
+    <h2>Why Choose ZAB Bank?</h2>
+    <br>
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3>Secure and Convenient Online Banking</h3>
+        </div>
+
+        <div class="col-md-6">
+            <img src="{% static './images/investment.jpg' %}" alt="Feature 1" class="img-fluid" style="max-width: 100%;">
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-md-6">
+            <img src="{% static './images/10-ways-you-can-provide-more-personalised-customer-service.png' %}" alt="Feature 2" class="img-fluid" style="max-width: 100%;">
+        </div>
+
+        <div class="col-md-6">
+            <h3>Personalized Customer Service</h3>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3>Investment Opportunities</h3>
+        </div>
+
+        <div class="col-md-6">
+            <img src="{% static './images/images.jpeg' %}" alt="Feature 3" class="img-fluid" style="max-width: 100%;">
+        </div>
+
+    </div>
+    <br>
+</section>
+<br>
+
+<footer class="text-center">
+    <p>&copy; 2024 ZAB BANK. All rights reserved.</p>
+</footer>
+
+{% endblock %}

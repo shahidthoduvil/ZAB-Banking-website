@@ -1,0 +1,214 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #applicationForm {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    {% comment %} label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    } {% endcomment %}
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    button {
+        background-color: #c9c8c5;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        border:3 px;
+    }
+
+    input[type="submit"]:hover,
+    button:hover {
+        background-color: #08376a;
+    }
+........................................
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="checkbox"],
+    label {
+        display: inline-block;
+        margin-right: 10px; 
+    }
+</style>
+
+<button onclick="showForm()">Open Form</button>
+
+<div id="applicationForm" style="display:none;">
+    {% if messages %}
+  <ul class="messages">
+
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+
+  </ul>
+
+{% endif %}
+
+    <form id="myForm" onsubmit="submitForm(); return false;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="dob">DOB:</label>
+        <input type="date" id="dob" name="dob" required><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age"><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            {% for choice in gender_choices %}
+            <option value="{{choice.0}}">{{choice.1}}</option>
+            
+            {% endfor %}
+        </select><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea><br>
+
+        <label for="district">District:</label>
+        <select class="form-control" id="id_district" name="district">
+            {% for district in district_choices %}
+                <option value="{{ district.id }}">{{ district.name }}</option>
+            {% endfor %}
+        </select>
+        
+        <br>
+
+        <label for="branch">Branch:</label>
+            <select class="form-control" id="id_branch" name="branch">
+                <option value="">Select District first</option>
+            </select>
+                
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" name="accountType" required>
+            {% for choice in account_type_choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+            
+        </select><br>
+
+        <label for="accountType">Material Provide:</label>
+        <div>
+          
+            {% for material in material_choices %}
+                <div style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="{{ material.name }}" name="materials" value="{{ material.name }}">
+                    <label for="{{ material.name }}">{{ material.name }}</label>
+                </div>
+                {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+
+        <br>
+        <div class="d-flex justify-content-center mt-3 login_container">
+            <input class="btn login_btn" type="submit" value="submit">
+        </div>
+        <button ><a href ='{% url 'home' %}'>Return to Home</a></button>
+    </form>
+</div>
+
+<script>
+    function showForm() {
+        var form = document.getElementById("applicationForm");
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+
+    function updateBranchDropdown() {
+       
+    }
+
+    function submitForm() {
+        var form = document.getElementById("myForm");
+        var formData = new FormData(form);
+
+        $.ajax({
+            url: '/home/newpage/',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+               
+                console.log(response);
+            },
+            error: function(error){
+                
+                console.log(error);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        $('#id_district').change(function(){
+            var selectedDistrict = $(this).val();
+    
+            $.ajax({
+                url: '/home/get_branches/',  
+                type: 'GET',
+                data: {'district_id': selectedDistrict},
+                success: function(data){
+                    $('#id_branch').empty();
+    
+                    $('#id_branch').append($('<option>', {
+                        value: '',
+                        text: 'Select Branch'
+                    }));
+    
+                    $.each(data.branches, function(index, branch){
+                        $('#id_branch').append($('<option>', {
+                            value: branch.id,
+                            text: branch.name
+                        }));
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+
+
